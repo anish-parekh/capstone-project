@@ -366,7 +366,7 @@ export default function SearchPage() {
                   sx={{ height: 36, minWidth: 120 }}
                 >
                   <MenuItem value=""><em>Select System</em></MenuItem>
-                  <MenuItem value="CIRC">CIRC</MenuItem>
+                  <MenuItem value="System 1">System 1</MenuItem>
                   <MenuItem value="system2">System 2</MenuItem>
                   <MenuItem value="system3">System 3</MenuItem>
                 </Select>
