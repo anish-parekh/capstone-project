@@ -1,0 +1,67 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-dark: #222222;
+  --primary-grey: #444444;
+  --secondary-grey: #666666;
+  --light-grey: #e0e0e0;
+  --ultra-light-grey: #f5f5f5;
+  --accent-color: #2a2a2a;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+  --border-color: rgba(0, 0, 0, 0.12);
+  --hover-color: rgba(0, 0, 0, 0.04);
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--ultra-light-grey);
+  color: var(--text-dark);
+}
+
+/* Table specific styles */
+.table-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+#root {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.MuiToolbar-root {
+  min-height: 64px;
+}
+
+.MuiTab-root {
+  font-weight: 500;
+}
+
+.MuiTab-root.Mui-selected {
+  font-weight: 600;
+}
+
+.MuiPaper-root {
+  transition: box-shadow 0.3s ease;
+}
+
+.MuiPaper-root:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.MuiButton-contained {
+  text-transform: none;
+}
