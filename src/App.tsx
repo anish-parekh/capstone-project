@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Box, CssBaseline, Toolbar, createTheme, ThemeProvider } from '@mui/material'
 import './App.css'
-import Sidebar from './components/Sidebar'
-import SearchPage from './components/SearchPage'
+import Sidebar from './components/layout/Sidebar'
+import SearchPage from './components/search/SearchPage'
 
 // Create a theme with enhanced colors and component styling
 const theme = createTheme({
@@ -203,8 +203,8 @@ function App() {
   const [selectedOption, setSelectedOption] = useState('search')
 
   const handleSelectOption = (option: string) => {
-    setSelectedOption(option)
-  }
+    setSelectedOption(option);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -226,7 +226,7 @@ function App() {
         </Box>
       </Box>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;
