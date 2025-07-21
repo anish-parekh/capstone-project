@@ -12,16 +12,12 @@ import {
   Divider
 } from '@mui/material';
 import { 
-  Search as SearchIcon,
-  Dashboard as DashboardIcon,
-  Settings as SettingsIcon,
-  History as HistoryIcon,
-  Bookmark as BookmarkIcon
+  Search as SearchIcon
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
 // Define the width of the sidebar
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 interface SidebarProps {
   selected: string;
@@ -29,13 +25,9 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ selected, onSelectOption }) => {
-  // Navigation items with their icons
+  // Navigation items with their icons - simplified to only search
   const navItems = [
-    { id: 'search', text: 'Search', icon: <SearchIcon /> },
-    { id: 'dashboard', text: 'Dashboard', icon: <DashboardIcon /> },
-    { id: 'history', text: 'History', icon: <HistoryIcon /> },
-    { id: 'saved', text: 'Saved', icon: <BookmarkIcon /> },
-    { id: 'settings', text: 'Settings', icon: <SettingsIcon /> }
+    { id: 'search', text: 'Trade Search', icon: <SearchIcon /> }
   ];
 
   return (
@@ -56,71 +48,71 @@ const Sidebar: React.FC<SidebarProps> = ({ selected, onSelectOption }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '16px',
+        padding: '12px',
         backgroundColor: '#1e293b',
-        color: 'white'
+        color: 'white',
+        minHeight: '56px'
       }}>
-        <Typography variant="h6" component="div" sx={{ fontWeight: 700 }}>
+        <Typography variant="h6" component="div" sx={{ fontWeight: 700, fontSize: '1rem' }}>
           Trade Dashboard
         </Typography>
       </Toolbar>
       <Box sx={{ overflow: 'auto', height: '100%' }}>
-        <List sx={{ pt: 2 }}>
-          {navItems.map((item) => (
-            <ListItem key={item.id} disablePadding>
-              <ListItemButton
-                selected={selected === item.id}
-                onClick={() => onSelectOption(item.id)}
-                sx={{
-                  position: 'relative',
-                  borderRadius: '0 24px 24px 0',
-                  marginRight: '8px',
-                  marginLeft: '8px',
-                  mb: 0.5,
-                  '&.Mui-selected': {
-                    backgroundColor: 'rgba(30, 41, 59, 0.08)',
-                    '&:hover': {
-                      backgroundColor: 'rgba(30, 41, 59, 0.12)',
-                    },
-                  },
+        <List sx={{ pt: 1.5 }}>
+          {/* Single option - always selected */}
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={true}
+              onClick={() => onSelectOption('search')}
+              sx={{
+                position: 'relative',
+                borderRadius: '0 20px 20px 0',
+                marginRight: '6px',
+                marginLeft: '6px',
+                mb: 0.5,
+                py: 0.8,
+                backgroundColor: 'rgba(30, 41, 59, 0.08)',
+                '&:hover': {
+                  backgroundColor: 'rgba(30, 41, 59, 0.12)',
+                },
+              }}
+            >
+              <motion.div
+                layoutId="sidebar-active-indicator"
+                initial={false}
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  width: 4,
+                  backgroundColor: '#1e293b',
+                  borderRadius: '0 4px 4px 0',
                 }}
-              >
-                {selected === item.id && (
-                  <motion.div
-                    layoutId="sidebar-active-indicator"
-                    initial={false}
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                      top: 0,
-                      bottom: 0,
-                      width: 4,
-                      backgroundColor: '#1e293b',
-                      borderRadius: '0 4px 4px 0',
-                    }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <ListItemIcon sx={{ 
-                  minWidth: '40px',
-                  color: selected === item.id ? '#1e293b' : 'rgba(0, 0, 0, 0.54)'
-                }}>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText 
-                  primary={item.text} 
-                  primaryTypographyProps={{ 
-                    fontWeight: selected === item.id ? 600 : 400,
-                    fontSize: '0.95rem'
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              />
+              <ListItemIcon sx={{ 
+                minWidth: '36px',
+                color: '#1e293b',
+                '& .MuiSvgIcon-root': {
+                  fontSize: '1.3rem'
+                }
+              }}>
+                <SearchIcon />
+              </ListItemIcon>
+              <ListItemText 
+                primary="Trade Search" 
+                primaryTypographyProps={{ 
+                  fontWeight: 600,
+                  fontSize: '0.9rem'
+                }}
+              />
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider sx={{ my: 2 }} />
-        <Box sx={{ p: 2 }}>
-          <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
+        <Box sx={{ p: 1.5 }}>
+          <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500, fontSize: '0.75rem' }}>
             Version 1.0.0
           </Typography>
         </Box>

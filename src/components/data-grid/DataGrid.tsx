@@ -46,7 +46,6 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
       width: calculateColumnWidth(column.label)
     }))
   );
-  const [forceUpdate, setForceUpdate] = useState<boolean>(false);
 
   // Initialize global variables if needed
   useEffect(() => {
@@ -155,7 +154,7 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
         prevWidths.map(col => col.id === id ? { ...col, width } : col)
       );
     };
-    window.forceUpdate = () => setForceUpdate(prev => !prev);
+    window.forceUpdate = () => {}; // Empty function as placeholder
     
     // Add event listeners for mousemove and mouseup
     document.addEventListener('mousemove', handleResizeMove);
@@ -273,12 +272,12 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center',
-        p: 2, 
+        p: 1.5, 
         borderBottom: '1px solid rgba(224, 224, 224, 0.4)', 
         backgroundColor: '#f8fafc'
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#1e293b', mr: 2 }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#1e293b', mr: 1.5, fontSize: '0.9rem' }}>
             Results ({processedData.length})
           </Typography>
           
@@ -313,7 +312,7 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
       {/* Scrollable table container */}
       <Box sx={{ 
         width: '100%', 
-        height: '400px',
+        height: '350px',
         position: 'relative',
         overflow: 'hidden',
         borderRadius: 1,
@@ -328,8 +327,8 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
           overflowX: 'auto',
           overflowY: 'auto',
           '&::-webkit-scrollbar': {
-            width: '10px',
-            height: '10px',
+            width: '8px',
+            height: '8px',
           },
           '&::-webkit-scrollbar-thumb': {
             backgroundColor: '#94a3b8',
@@ -360,7 +359,7 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
             aria-label="workflow table"
           >
             <TableHead sx={{ position: 'sticky', top: 0, zIndex: 5 }}>
-              <TableRow sx={{ height: '56px' }}>
+              <TableRow sx={{ height: '42px' }}>
                 <TableCell 
                   padding="checkbox" 
                   align="center" 
@@ -370,7 +369,7 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
                     color: '#ffffff', 
                     fontWeight: 600,
                     borderBottom: 'none',
-                    py: 1.5,
+                    py: 1,
                     position: 'sticky',
                     top: 0,
                     zIndex: 4

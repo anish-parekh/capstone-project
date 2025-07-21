@@ -26,11 +26,11 @@ const CounterpartySearch: React.FC<CounterpartySearchProps> = ({
 }) => {
   return (
     <Box sx={{ bgcolor: '#ffffff' }}>
-      <Box sx={{ p: 2 }}>
-        <Typography sx={{ fontSize: '1rem', fontWeight: 500, mb: 2 }}>Counterparty Search</Typography>
+      <Box sx={{ p: 1.5 }}>
+        <Typography sx={{ fontSize: '0.9rem', fontWeight: 500, mb: 1.5 }}>Counterparty Search</Typography>
         
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 2 }}>
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, mb: 1.5 }}>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: 1.5 }}>
             <Box>
               <Typography sx={{ fontSize: '0.75rem', fontWeight: 500, mb: 0.5, color: '#555' }}>Source System</Typography>
               <EnhancedSelect
@@ -40,7 +40,7 @@ const CounterpartySearch: React.FC<CounterpartySearchProps> = ({
                 fullWidth
                 size="small"
                 sx={{ 
-                  height: '32px',
+                  height: '28px',
                   '& .MuiOutlinedInput-notchedOutline': {
                     borderColor: '#ccc',
                   },
@@ -48,8 +48,8 @@ const CounterpartySearch: React.FC<CounterpartySearchProps> = ({
                     borderColor: '#999',
                   },
                   '& .MuiSelect-select': {
-                    padding: '4px 14px',
-                    fontSize: '0.875rem',
+                    padding: '2px 12px',
+                    fontSize: '0.8rem',
                   }
                 }}
               >
@@ -72,8 +72,8 @@ const CounterpartySearch: React.FC<CounterpartySearchProps> = ({
                 size="small"
                 sx={{
                   '& .MuiOutlinedInput-root': {
-                    height: '32px',
-                    fontSize: '0.875rem',
+                    height: '28px',
+                    fontSize: '0.8rem',
                     '& fieldset': {
                       borderColor: '#ccc',
                     },
@@ -82,7 +82,7 @@ const CounterpartySearch: React.FC<CounterpartySearchProps> = ({
                     },
                   },
                   '& .MuiOutlinedInput-input': {
-                    padding: '4px 14px',
+                    padding: '2px 12px',
                   }
                 }}
               />
@@ -99,8 +99,8 @@ const CounterpartySearch: React.FC<CounterpartySearchProps> = ({
               size="small"
               sx={{
                 '& .MuiOutlinedInput-root': {
-                  height: '32px',
-                  fontSize: '0.875rem',
+                  height: '28px',
+                  fontSize: '0.8rem',
                   '& fieldset': {
                     borderColor: '#ccc',
                   },
@@ -109,7 +109,7 @@ const CounterpartySearch: React.FC<CounterpartySearchProps> = ({
                   },
                 },
                 '& .MuiOutlinedInput-input': {
-                  padding: '4px 14px',
+                  padding: '2px 12px',
                 }
               }}
             />
@@ -123,8 +123,8 @@ const CounterpartySearch: React.FC<CounterpartySearchProps> = ({
             sx={{ 
               textTransform: 'none', 
               fontWeight: 400,
-              fontSize: '0.75rem',
-              padding: '4px 10px',
+              fontSize: '0.7rem',
+              padding: '3px 8px',
               color: '#333',
               borderColor: '#ccc',
               backgroundColor: '#f8f8f8',
@@ -144,8 +144,8 @@ const CounterpartySearch: React.FC<CounterpartySearchProps> = ({
             sx={{ 
               textTransform: 'none', 
               fontWeight: 400,
-              fontSize: '0.75rem',
-              padding: '4px 10px',
+              fontSize: '0.7rem',
+              padding: '3px 8px',
               backgroundColor: '#333',
               color: '#ffffff',
               '&:hover': {

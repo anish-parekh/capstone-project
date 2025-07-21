@@ -42,6 +42,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: 14, // Reduced base font size
     h1: {
       fontWeight: 700,
     },
@@ -59,28 +60,30 @@ const theme = createTheme({
     },
     h6: {
       fontWeight: 600,
+      fontSize: '1.1rem', // Reduced h6 size
     },
     button: {
       fontWeight: 500,
       textTransform: 'none',
+      fontSize: '0.875rem', // Smaller button text
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 6, // Reduced border radius
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: 'none',
-          borderRadius: 8,
+          borderRadius: 6,
           fontWeight: 500,
-          padding: '8px 16px',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+          padding: '6px 12px',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24)',
           transition: 'all 0.3s cubic-bezier(.25,.8,.25,1)',
           '&:hover': {
-            boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
-            transform: 'translateY(-2px)',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23)',
+            transform: 'translateY(-1px)',
           },
         },
         outlined: {
@@ -102,7 +105,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
-            borderRadius: 8,
+            borderRadius: 6,
             transition: 'all 0.3s ease',
             '& fieldset': {
               borderColor: 'rgba(0, 0, 0, 0.23)',
@@ -113,7 +116,7 @@ const theme = createTheme({
             },
             '&.Mui-focused fieldset': {
               borderColor: '#1e293b',
-              boxShadow: '0 0 0 3px rgba(30, 41, 59, 0.1)',
+              boxShadow: '0 0 0 2px rgba(30, 41, 59, 0.1)',
             },
           },
         },
@@ -122,11 +125,11 @@ const theme = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
-          boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+          borderRadius: 6,
+          boxShadow: '0 1px 2px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24)',
           transition: 'all 0.3s cubic-bezier(.25,.8,.25,1)',
           '&:hover': {
-            boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23)',
           },
         },
         elevation1: {
@@ -168,8 +171,9 @@ const theme = createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          padding: '12px 16px',
+          padding: '8px 12px',
           borderBottom: '1px solid rgba(224, 224, 224, 0.5)',
+          fontSize: '0.8125rem',
         },
       },
     },
@@ -200,9 +204,11 @@ const theme = createTheme({
 });
 
 function App() {
+  // Since we only have one option now, we can simplify this
   const [selectedOption, setSelectedOption] = useState('search')
 
   const handleSelectOption = (option: string) => {
+    // This will always be 'search', but keeping the handler for potential future expansion
     setSelectedOption(option);
   };
 
@@ -215,8 +221,8 @@ function App() {
           component="main" 
           sx={{ 
             flexGrow: 1, 
-            p: 3, 
-            width: 'calc(100% - 240px)', 
+            p: 2, 
+            width: 'calc(100% - 200px)', 
             backgroundColor: theme.palette.background.default,
             overflow: 'hidden'
           }}
