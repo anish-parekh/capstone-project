@@ -235,9 +235,10 @@ const SearchPage: React.FC = () => {
         </Box>
       </Box>
       
-      {/* Trade ID Search Panel */}
-      {activeTab === 'tradeId' && (
-        <Box>
+      {/* Input area - changes based on active tab */}
+      <Box>
+        {/* Trade ID Search Panel */}
+        {activeTab === 'tradeId' && (
           <TradeIdSearch 
             sourceSystem={sourceSystem}
             tradeId={tradeId}
@@ -246,22 +247,10 @@ const SearchPage: React.FC = () => {
             onSearch={handleSearch}
             onClear={handleClear}
           />
-          
-          <Box sx={{ mt: 0.5, px: 1.5, py: 0.5 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
-              <Typography sx={{ fontSize: '0.8rem', fontWeight: 500 }}>Results ({sampleRows.length})</Typography>
-            </Box>
-            <DataGrid 
-              data={sampleRows}
-              columns={allColumns}
-            />
-          </Box>
-        </Box>
-      )}
-      
-      {/* Counterparty Search Panel */}
-      {activeTab === 'counterparty' && (
-        <Box>
+        )}
+        
+        {/* Counterparty Search Panel */}
+        {activeTab === 'counterparty' && (
           <CounterpartySearch 
             counterparty={counterparty}
             onCounterpartyChange={setCounterparty}
@@ -272,18 +261,19 @@ const SearchPage: React.FC = () => {
             onSearch={handleSearch}
             onClear={handleClear}
           />
-          
-          <Box sx={{ mt: 0.5, px: 1.5, py: 0.5 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
-              <Typography sx={{ fontSize: '0.8rem', fontWeight: 500 }}>Results ({sampleRows.length})</Typography>
-            </Box>
-            <DataGrid 
-              data={sampleRows}
-              columns={allColumns}
-            />
-          </Box>
+        )}
+      </Box>
+      
+      {/* Common Results Grid - always visible */}
+      <Box sx={{ mt: 0.5, px: 1.5, py: 0.5 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
+          <Typography sx={{ fontSize: '0.8rem', fontWeight: 500 }}>Results ({sampleRows.length})</Typography>
         </Box>
-      )}
+        <DataGrid 
+          data={sampleRows}
+          columns={allColumns}
+        />
+      </Box>
     </Box>
   );
 };
