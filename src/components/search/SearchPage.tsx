@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
 import { DataGrid, allColumns } from '../data-grid';
 import { TradeIdSearch, CounterpartySearch } from '.';
 import { generateMockData } from '../../utils/dataUtils';
@@ -236,36 +237,50 @@ const SearchPage: React.FC = () => {
       </Box>
       
       {/* Input area - changes based on active tab */}
-      <Box>
-        {/* Trade ID Search Panel */}
-        {activeTab === 'tradeId' && (
-          <TradeIdSearch 
-            sourceSystem={sourceSystem}
-            tradeId={tradeId}
-            onSourceSystemChange={setSourceSystem}
-            onTradeIdChange={setTradeId}
-            onSearch={handleSearch}
-            onClear={handleClear}
-          />
-        )}
+      <Box sx={{ position: 'relative', minHeight: '160px', marginBottom: 3 }}>
+          {/* Trade ID Search Panel */}
+          {activeTab === 'tradeId' && (
+            <motion.div
+              key="tradeIdSearch"
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+            >
+              <TradeIdSearch 
+                sourceSystem={sourceSystem}
+                tradeId={tradeId}
+                onSourceSystemChange={setSourceSystem}
+                onTradeIdChange={setTradeId}
+                onSearch={handleSearch}
+                onClear={handleClear}
+              />
+            </motion.div>
+          )}
+          
+          {/* Counterparty Search Panel */}
+          {activeTab === 'counterparty' && (
+            <motion.div
+              key="counterpartySearch"
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+            >
+              <CounterpartySearch 
+                counterparty={counterparty}
+                onCounterpartyChange={setCounterparty}
+                sourceSystem={sourceSystem}
+                onSourceSystemChange={setSourceSystem}
+                WCISId={WCISId}
+                onWCISIdChange={setWCISId}
+                onSearch={handleSearch}
+                onClear={handleClear}
+              />
+            </motion.div>
+          )}
+        </Box>
         
-        {/* Counterparty Search Panel */}
-        {activeTab === 'counterparty' && (
-          <CounterpartySearch 
-            counterparty={counterparty}
-            onCounterpartyChange={setCounterparty}
-            sourceSystem={sourceSystem}
-            onSourceSystemChange={setSourceSystem}
-            WCISId={WCISId}
-            onWCISIdChange={setWCISId}
-            onSearch={handleSearch}
-            onClear={handleClear}
-          />
-        )}
-      </Box>
-      
-      {/* Common Results Grid - always visible */}
-      <Box sx={{ mt: 0.5, px: 1.5, py: 0.5 }}>
+        {/* Common Results Grid - always visible */}
+        <Box sx={{ px: 1.5, py: 0.5 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 0.5 }}>
           <Typography sx={{ fontSize: '0.8rem', fontWeight: 500 }}>Results ({sampleRows.length})</Typography>
         </Box>
