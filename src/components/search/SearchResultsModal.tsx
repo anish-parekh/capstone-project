@@ -1,29 +1,35 @@
 import React from 'react';
 import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
+  Dialog, 
+  DialogTitle, 
+  DialogContent, 
+  DialogActions,
+  Box, 
+  Button, 
+  Typography, 
   IconButton,
-  Box,
-  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Checkbox,
   FormControl,
   Select,
   MenuItem,
-  Button,
   TextField,
-  Checkbox,
   FormControlLabel,
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
   Popover,
-  InputAdornment
+  InputAdornment,
+  TableContainer,
+  TableSortLabel,
+  TablePagination,
+  Paper
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ClearIcon from '@mui/icons-material/Clear';
+import { ScrollableContainer } from '../common';
 // Define the structure for our trade data based on the image
 interface TradeResult {
   selected?: boolean;
@@ -190,27 +196,7 @@ const SearchResultsModal: React.FC<SearchResultsModalProps> = ({ open, onClose, 
         <Box sx={{ flex: 1, height: 'calc(100% - 120px)', p: 1.5 }}>
 
           
-          <Box sx={{ 
-            border: '1px solid #ddd',
-            borderRadius: '4px',
-            overflow: 'auto',
-            maxHeight: '400px',
-            '&::-webkit-scrollbar': {
-              width: '8px',
-              height: '8px',
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: '#94a3b8',
-              borderRadius: '8px',
-              '&:hover': {
-                backgroundColor: '#64748b'
-              }
-            },
-            '&::-webkit-scrollbar-track': {
-              borderRadius: '8px',
-              backgroundColor: '#f1f5f9'
-            }
-          }}>
+          <ScrollableContainer maxHeight="400px">
             <Table stickyHeader sx={{ 
               minWidth: '800px',
               '& .MuiTableHead-root': {
@@ -464,7 +450,7 @@ const SearchResultsModal: React.FC<SearchResultsModalProps> = ({ open, onClose, 
                 })}
               </TableBody>
             </Table>
-          </Box>
+          </ScrollableContainer>
         </Box>
 
         {/* Bottom pricing options */}

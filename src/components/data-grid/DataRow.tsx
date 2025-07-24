@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TableRow, TableCell, Checkbox } from '@mui/material';
+import { useClickAnimation } from '../../hooks';
 import type { Column, TradeRow } from '../../types';
 
 interface DataRowProps {
@@ -17,19 +18,11 @@ const DataRow: React.FC<DataRowProps> = ({
   getColumnWidth,
   onRowClick
 }) => {
-  // Add state to track click effect
-  const [isClicked, setIsClicked] = useState(false);
-  
-  // Handle click animation and open popup
-  const handleRowClick = () => {
-    setIsClicked(true);
-    
-    // Show the click animation first, then open the popup
-    setTimeout(() => {
-      setIsClicked(false);
-      onRowClick(row); // Open the popup after the click animation
-    }, 150);
-  };
+  // Use the click animation hook
+  const { isClicked, handleClick } = useClickAnimation(() => {
+    // This callback runs after animation completes
+    onRowClick(row); // Open the popup after the click animation
+  });
   
   // Alternate row styling
   const isEven = index % 2 === 0;
@@ -37,7 +30,7 @@ const DataRow: React.FC<DataRowProps> = ({
   return (
     <TableRow 
       key={row.id}
-      onClick={handleRowClick}
+      onClick={handleClick}
       sx={{ 
         backgroundColor: isEven ? '#ffffff' : '#f8fafc',
         transition: 'all 0.15s ease',

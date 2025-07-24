@@ -6,14 +6,10 @@ import {
   TableBody, 
   TableRow, 
   TableCell, 
-  Typography,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  IconButton
+  Typography
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import { EnhancedPaper } from '../common';
+import { EnhancedPaper, DetailDialog } from '../common';
+import RowDetailView from './RowDetailView';
 import type { Column, ColumnFilter, ColumnWidth, SortConfig, TradeRow } from '../../types';
 import { calculateColumnWidth } from '../../utils/dataUtils';
 import ColumnSelector from './ColumnSelector';
@@ -450,57 +446,14 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
     </EnhancedPaper>
 
       {/* Row Detail Dialog */}
-      <Dialog
+      <DetailDialog
         open={dialogOpen}
         onClose={handleDialogClose}
+        title="Trade Details"
         maxWidth="md"
-        fullWidth
-        sx={{
-          '& .MuiDialog-paper': {
-            borderRadius: 2,
-          }
-        }}
       >
-        <DialogTitle sx={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center',
-          backgroundColor: '#1e293b',
-          color: 'white',
-          borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-          p: 2
-        }}>
-          <Typography variant="h6">
-            Trade Details
-          </Typography>
-          <IconButton 
-            onClick={handleDialogClose}
-            sx={{ color: 'white' }}
-            aria-label="close"
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent dividers sx={{ p: 3 }}>
-          {selectedRow && (
-            <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 3 }}>
-              {Object.entries(selectedRow || {}).map(([key, value]) => 
-                // Skip the id key which is just for internal use
-                key !== 'id' ? (
-                  <Box key={key} sx={{ mb: 2 }}>
-                    <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 0.5, textTransform: 'capitalize' }}>
-                      {key.replace(/([A-Z])/g, ' $1').trim()}
-                    </Typography>
-                    <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                      {value?.toString() || '—'}
-                    </Typography>
-                  </Box>
-                ) : null
-              )}
-            </Box>
-          )}
-        </DialogContent>
-      </Dialog>
+        <RowDetailView data={selectedRow} />
+      </DetailDialog>
     </>
   );
 };
