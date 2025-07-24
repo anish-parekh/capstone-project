@@ -6,8 +6,13 @@ import {
   TableBody, 
   TableRow, 
   TableCell, 
-  Typography
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  IconButton
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { EnhancedPaper } from '../common';
 import type { Column, ColumnFilter, ColumnWidth, SortConfig, TradeRow } from '../../types';
 import { calculateColumnWidth } from '../../utils/dataUtils';
@@ -46,6 +51,21 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
       width: calculateColumnWidth(column.label)
     }))
   );
+  
+  // Row detail dialog state
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<TradeRow | null>(null);
+  
+  // Handle row click
+  const handleRowClick = (row: TradeRow) => {
+    setSelectedRow(row);
+    setDialogOpen(true);
+  };
+  
+  // Handle dialog close
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
 
   // Initialize global variables if needed
   useEffect(() => {
@@ -266,6 +286,7 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
   const activeFilterCount = filters.length;
 
   return (
+    <>
     <EnhancedPaper sx={{ width: '100%', mb: 2, overflow: 'hidden' }}>
       {/* Table controls */}
       <Box sx={{ 
@@ -402,6 +423,7 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
                   index={index}
                   visibleColumns={visibleColumnConfigs}
                   getColumnWidth={getColumnWidth}
+                  onRowClick={handleRowClick}
                 />
               ))}
               
@@ -426,6 +448,60 @@ const DataGrid: React.FC<DataGridProps> = ({ data, columns }) => {
         </Box>
       </Box>
     </EnhancedPaper>
+
+      {/* Row Detail Dialog */}
+      <Dialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        maxWidth="md"
+        fullWidth
+        sx={{
+          '& .MuiDialog-paper': {
+            borderRadius: 2,
+          }
+        }}
+      >
+        <DialogTitle sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          backgroundColor: '#1e293b',
+          color: 'white',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+          p: 2
+        }}>
+          <Typography variant="h6">
+            Trade Details
+          </Typography>
+          <IconButton 
+            onClick={handleDialogClose}
+            sx={{ color: 'white' }}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent dividers sx={{ p: 3 }}>
+          {selectedRow && (
+            <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 3 }}>
+              {Object.entries(selectedRow || {}).map(([key, value]) => 
+                // Skip the id key which is just for internal use
+                key !== 'id' ? (
+                  <Box key={key} sx={{ mb: 2 }}>
+                    <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 0.5, textTransform: 'capitalize' }}>
+                      {key.replace(/([A-Z])/g, ' $1').trim()}
+                    </Typography>
+                    <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                      {value?.toString() || '—'}
+                    </Typography>
+                  </Box>
+                ) : null
+              )}
+            </Box>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

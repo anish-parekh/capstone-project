@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TableRow, TableCell, Checkbox } from '@mui/material';
 import type { Column, TradeRow } from '../../types';
 
@@ -7,27 +7,52 @@ interface DataRowProps {
   index: number;
   visibleColumns: Column[];
   getColumnWidth: (columnId: string) => number;
+  onRowClick: (row: TradeRow) => void;
 }
 
 const DataRow: React.FC<DataRowProps> = ({
   row,
   index,
   visibleColumns,
-  getColumnWidth
+  getColumnWidth,
+  onRowClick
 }) => {
+  // Add state to track click effect
+  const [isClicked, setIsClicked] = useState(false);
+  
+  // Handle click animation and open popup
+  const handleRowClick = () => {
+    setIsClicked(true);
+    
+    // Show the click animation first, then open the popup
+    setTimeout(() => {
+      setIsClicked(false);
+      onRowClick(row); // Open the popup after the click animation
+    }, 150);
+  };
+  
   // Alternate row styling
   const isEven = index % 2 === 0;
   
   return (
     <TableRow 
       key={row.id}
+      onClick={handleRowClick}
       sx={{ 
         backgroundColor: isEven ? '#ffffff' : '#f8fafc',
-        transition: 'all 0.2s ease',
+        transition: 'all 0.15s ease',
+        transform: isClicked ? 'scale(0.995)' : 'scale(1)',
+        boxShadow: isClicked ? 'inset 0 0 0 2px rgba(30, 41, 59, 0.3)' : 'none',
         '&:hover': {
           backgroundColor: '#f1f5f9',
           boxShadow: 'inset 0 0 0 1px rgba(148, 163, 184, 0.2)'
-        }
+        },
+        '&:active': {
+          transform: 'scale(0.995)',
+          backgroundColor: '#e2e8f0',
+          boxShadow: 'inset 0 0 0 2px rgba(30, 41, 59, 0.3)'
+        },
+        cursor: 'pointer' // Add pointer cursor to indicate clickable row
       }}
     >
       <TableCell 
