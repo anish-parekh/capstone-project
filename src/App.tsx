@@ -205,26 +205,34 @@ const theme = createTheme({
 
 function App() {
   // Since we only have one option now, we can simplify this
-  const [selectedOption, setSelectedOption] = useState('search')
+  const [selectedOption, setSelectedOption] = useState('search');
+  // Track sidebar width for main content adjustment
+  const [sidebarWidth, setSidebarWidth] = useState(200);
 
   const handleSelectOption = (option: string) => {
     // This will always be 'search', but keeping the handler for potential future expansion
     setSelectedOption(option);
+  };
+  
+  // Function to update sidebar width in App state
+  const handleSidebarResize = (width: number) => {
+    setSidebarWidth(width);
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex', width: '100%', height: '100vh', overflow: 'hidden' }}>
         <CssBaseline />
-        <Sidebar selected={selectedOption} onSelectOption={handleSelectOption} />
+        <Sidebar onSelectOption={handleSelectOption} onWidthChange={handleSidebarResize} />
         <Box 
           component="main" 
           sx={{ 
             flexGrow: 1, 
             p: 2, 
-            width: 'calc(100% - 200px)', 
+            width: `calc(100% - ${sidebarWidth}px)`, 
             backgroundColor: theme.palette.background.default,
-            overflow: 'hidden'
+            overflow: 'hidden',
+            transition: 'width 0.2s ease-in-out',
           }}
         >
           <Toolbar />
